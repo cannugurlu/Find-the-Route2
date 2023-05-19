@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 
 public class Puzzle : MonoBehaviour
 {
     int[] rotations = { 270, 180, 90, 0 };
-    bool isCorrect = false;
-    public int correctRot;
+    public bool isCorrect = false;
+    public int[] correctRot;
     public int posRot;
     GameManager gameManager;
     private void Awake()
@@ -16,77 +15,72 @@ public class Puzzle : MonoBehaviour
     }
     void Start()
     {
+        posRot = correctRot.Length;
         int rand = Random.Range(0, rotations.Length);
-        transform.eulerAngles = new UnityEngine.Vector3(0, rotations[rand], 0);
+        transform.eulerAngles = new Vector3(0, rotations[rand], 0);
 
         if (posRot > 1)
         {
-            if (Mathf.RoundToInt(transform.eulerAngles.y) == correctRot || (correctRot - Mathf.RoundToInt(transform.eulerAngles.y) == 180))
+            if (transform.eulerAngles.y == correctRot[0] || transform.eulerAngles.y == correctRot[1])
             {
                 isCorrect = true;
             }
-
         }
         else
         {
-            if (Mathf.RoundToInt(transform.eulerAngles.y) == correctRot)
+            if(transform.eulerAngles.y == correctRot[0])
             {
                 isCorrect = true;
             }
-
         }
-
         if (isCorrect)
         {
             gameManager.Move(isCorrect);
         }
-
+        
 
 
     }
 
     private void OnMouseDown()
     {
-        transform.Rotate(new UnityEngine.Vector3(0, 90, 0));
-
-        transform.eulerAngles = new UnityEngine.Vector3(transform.eulerAngles.x, Mathf.RoundToInt(transform.eulerAngles.y), transform.eulerAngles.z);
+        transform.Rotate(new Vector3(0, 90, 0));
+        int k = 0;
 
         if (posRot > 1)
         {
-
-            if (transform.eulerAngles.y == correctRot || (correctRot - transform.eulerAngles.y == 180))
+            if (transform.eulerAngles.y == correctRot[0] || transform.eulerAngles.y == correctRot[1])
             {
+                k = 1;
                 isCorrect = true;
-                gameManager.Move(isCorrect);
             }
-
-            else if (isCorrect)
+            else if(isCorrect)
             {
+                k = 1;
                 isCorrect = false;
-                gameManager.Move(isCorrect);
 
             }
-
         }
-
         else
         {
-
-            if (correctRot == transform.eulerAngles.y)
+            if (transform.eulerAngles.y == correctRot[0])
             {
+                k = 1;
                 isCorrect = true;
-                gameManager.Move(isCorrect);
             }
-
-
-            else if (isCorrect)
+            else if(isCorrect)
             {
+                k = 1;
                 isCorrect = false;
-                gameManager.Move(isCorrect);
             }
-
         }
 
+        if (k == 1)
+        {
+            gameManager.Move(isCorrect);
+        }  
+        
 
+  
     }
 }
