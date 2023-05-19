@@ -111,6 +111,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ee4ea0a46aa8694baa71c8d15dcd78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCorrect: 0
-  correctRot: 00000000
-  posRot: 0
+  correctRot: 0
+  posRot: 1
