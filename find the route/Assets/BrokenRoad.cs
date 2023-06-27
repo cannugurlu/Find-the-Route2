@@ -42,10 +42,12 @@ public class BrokenRoad : MonoBehaviour
     }*/
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Car" && broken == false)
+        if((other.gameObject.tag == "Car" || other.gameObject.name == "buldozer") && broken == false)
         {
             Invoke("Break", 0.5f);
         }
+
+        
     }
     void Break()
     {

@@ -16,6 +16,9 @@ TagManager:
   - obstacle
   - brokenroad
   - unbrokenroad
+  - up
+  - forward
+  - down
   layers:
   - Default
   - TransparentFX

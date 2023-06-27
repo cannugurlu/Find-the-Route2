@@ -86,7 +86,7 @@ public class moveController2 : MonoBehaviour
     {
         if(this.gameObject.name== objName && isMove)
         {
-            if (other.gameObject.tag == "yol")
+            if (other.gameObject.tag == "yol" || other.gameObject.tag == "up" || other.gameObject.tag == "forward" || other.gameObject.tag == "down")
             {
                 this.gameObject.GetComponent<Rigidbody>().velocity = velocity * transform.forward * Time.deltaTime;
                 isTrigger = true;
@@ -139,6 +139,11 @@ public class moveController2 : MonoBehaviour
                 }
             }
         }
+       if (other.gameObject.tag == "down")
+        {
+            gameObject.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x - 10, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
+        }
 
     }
     
@@ -167,6 +172,22 @@ public class moveController2 : MonoBehaviour
                 gameObject.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 90.0f, transform.rotation.eulerAngles.z);
 
             }
+        }
+
+        if(other.gameObject.tag == "up")
+        {
+            gameObject.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x-10, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+            
+        }
+        if (other.gameObject.tag == "forward")
+        {
+            gameObject.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x + 10, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
+        }
+        if (other.gameObject.tag == "down")
+        {
+            gameObject.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x + 10, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
         }
     }
 
